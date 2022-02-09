@@ -2,6 +2,9 @@
 from bs4 import BeautifulSoup as bs
 #pip install requests
 import requests as r
+#needed for bs4
+import lxml
+
 
 
 #asset you want to snipe
