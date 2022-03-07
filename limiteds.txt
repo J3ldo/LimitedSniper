@@ -1,3 +1,1 @@
 delete the example if you want to use this "(assetid) (max price), (split by a comma) (assetid) (max price)"
-
-NOT USEABLE YET!
