@@ -13,8 +13,13 @@ import lxml
 def asset(asset, minprice):
     return {"id" : asset, "price" : minprice}
 print("Copyright J3ldo, 2022-2023\n")
+load_file = input("Load from a file Y/N\n> ")
+if load_file.lower() == "y":
+    with open("limiteds.txt", "r") as f:
+        n = f.read()
 
-n = input("Please put it in like so '0(asset id) 69(max price),(comma for another one) 1(asset id) 70(max price)'\n> ")
+else:
+    n = input("Please put it in like so '0(asset id) 69(max price),(comma for another one) 1(asset id) 70(max price)'\n> ")
 #splits the choice
 choice = n.split(', ')
 id = []
