@@ -1,4 +1,7 @@
 # LimitSniper
+
+## IMPORTANT i am currently working on a way faster version. And i am working on a paid version that will buy the limited
+
 This is a basic limit sniper that will notify you using discord.  
 
 How to use: this should be straight forward.  
