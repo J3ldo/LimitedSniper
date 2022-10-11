@@ -15,7 +15,8 @@
 Here you will read a simple step-by-step guide about how the program works and how to install it.
 * Git clone the repository or install it from the releases
 * Run the config.exe or the config.py file and fill in the needed information. And also fill in your gotten roblox cookie.
-* Open the sniper.exe or sniper.py file and see as it snipes limiteds!
+* Open the sniper.exe or sniper.py file and see as it snipes limiteds!   
+**If this does'nt work please message Jeldo#9587* for help.**
 
 ### Notes: 
 * More then 10 limiteds is not reccommended as you will run into ratelimits
