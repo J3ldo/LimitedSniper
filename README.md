@@ -22,6 +22,7 @@ Here you will read a simple step-by-step guide about how the program works and h
 * More then 10 limiteds is not reccommended as you will run into ratelimits
 * This DOES NOT steal your roblox cookie. You can check the source code.
 * The .exe is the same as the .py files
+* Feel free to make suggestions or fork this repository.
 
 
 ## How it works
