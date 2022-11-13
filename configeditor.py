@@ -13,7 +13,12 @@ except FileNotFoundError:
 
 
 def new():
-    config["cookie"] = input("Full roblox cookie: ")
+    while 1:
+        config["cookie"] = input("Full roblox cookie: ")
+        if len(config["cookie"].split(".ROBLOSECURITY=_")) > 1:
+            break
+        print("You provided the wrong cookie. Please follow the instructions on the github page.")
+
     config["webhook"] = input("Webhook url: ")
     config['pingall'] = True if input("Ping everyone Y/N: ").lower() == "y" else False
 
@@ -64,7 +69,11 @@ def edit():
                        )
 
         if int(choice) == 1:
-            config["cookie"] = input("Full roblox cookie: ")
+            while 1:
+                config["cookie"] = input("Full roblox cookie: ")
+                if len(config["cookie"].split(".ROBLOSECURITY=_")) > 1:
+                    break
+                print("You provided the wrong cookie. Please follow the instructions on the github page.")
 
         elif int(choice) == 2:
             config["webhook"] = input("Webhook url: ")
