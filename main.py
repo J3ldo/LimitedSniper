@@ -27,7 +27,8 @@ print("Logged in.")
 
 debugging = config['DEBUG_MESSAGES']
 roblosec = "_"+config["cookie"].split(".ROBLOSECURITY=_")[1]
-
+results = []
+perm_results = []
 
 # This function gets your x-csrf token from roblox. This is needed to buy the limited.
 def get_xtoken():
@@ -49,6 +50,7 @@ def print_results(results: list, time_taken: float):
 # The main function that checks an asset and snipes if possible.
 def snipe_item(data):
     global results, perm_results
+
     out = r.get(f"https://www.roblox.com/catalog/{data['asset']}",
                 headers={"cookie": config['cookie']}, cookies={".ROBLOSECURITY": roblosec}).content
 
@@ -156,8 +158,8 @@ def snipe_item(data):
 
 # Main function. Runs the sniping
 def main():
-    results = []
-    perm_results = []
+    global results, perm_results
+
     x_get = Thread(target=get_xtoken)
     x_get.start()
     while len(config['limiteds']) > 0:
@@ -181,7 +183,7 @@ def main():
         to_sleep = (0.255 - time_taken * 0.1) * len(config['limiteds'])
         sleep(to_sleep if to_sleep >= 0 else 0)
 
-        results = perm_results
+        results = perm_results[:]
 
 
 if __name__ == '__main__':
