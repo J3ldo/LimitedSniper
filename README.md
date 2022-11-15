@@ -3,20 +3,22 @@
 
 ## Please read before using!
 ## Getting your roblox cookie
+**THE ROBLOX COOKIE THAT CAN BE FOUND IN YOUR COOKIES IS NOT THE SAME COOKIE PLEASE FOLLOW THIS GUIDE**
 * Open roblox in your browser.
 * Open the developer console by pressing: "CTRL+SHIFT+F11"
 * Navigate to the "Network"
 * Reload the page
 * Scroll all the way up to the start and open the tab thats there. It should a blue box with blue lines in it.
-* Scroll down to the Request headers and the item which says cookie is your roblox cookie.
+* Scroll down to the Request headers tab. Then search for the cookie item.
 * Thats it you're now done!
+**Any problems or bugs? Please message J3ldo#9587 on discord**
 
 ## How to use
 Here you will read a simple step-by-step guide about how the program works and how to install it.
 * Git clone the repository or install it from the releases
-* Run the config.exe or the config.py file and fill in the needed information. And also fill in your gotten roblox cookie.
+* Run the config.exe or the config.py file and fill in the needed information.
 * Open the sniper.exe or sniper.py file and see as it snipes limiteds!   
-**If this does'nt work please message Jeldo#9587* for help.**
+If you run in to any issues message **Jeldo#9587** on discord for help.
 
 ### Notes: 
 * More then 10 limiteds is not reccommended as you will run into ratelimits
