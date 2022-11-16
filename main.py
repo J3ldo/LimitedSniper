@@ -15,6 +15,16 @@ pip install requests
 ID = '1'
 x_token = None
 
+print("Checking for updates...")
+script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
+with open("main.py", "r") as f:
+    if f.read() != script:
+        print("Updating...")
+        with open("main.py", "w") as f:
+            f.write(script)
+            input("Updated please reopen the script")
+            exit(0)
+
 # Create the file if it isnt already there.
 with open("logs.txt", "w") as _:
     pass
@@ -37,7 +47,7 @@ def get_xtoken():
     # Gets the x_token every 5 minutes.
     x_token = r.post("https://auth.roblox.com/v2/logout",
                      headers={'cookie': ".ROBLOSECURITY=" + roblosec}).headers["x-csrf-token"]
-    sleep(600)
+    sleep(120)
 
 
 # This function will print all the results gotten.
@@ -57,8 +67,9 @@ def snipe_item(data):
     items = compile(r"data-expected-price=.*")
 
     matches = items.finditer(str(out))
-    price = '-0'
+    price = -0
     for i in matches:
+        print(i.group()[21:].split("\"")[0])
         price = int(i.group()[21:].split("\"")[0])
 
     if debugging:
@@ -124,7 +135,8 @@ def snipe_item(data):
                 print("Tried to buy the limited but something went wrong.\n\n"
                       f"Information: \n"
                       f"Json: {check.json()}\n"
-                      f"Asset bought: {check.headers}\n")
+                      f"Asset bought: {check.headers}\n"
+                      f"CSRF TOKEN: {x_token}")
                 with open("logs.txt", "a") as f:
                     f.write(
                         f"\n\n\nSomething went wrong whilst buying the item.\nGot a respone code of: {check.status_code}. "
@@ -143,7 +155,8 @@ def snipe_item(data):
             print("Tried to buy the limited but something went wrong.\n\n"
                   f"Information: \n"
                   f"Json: {check.json()}\n"
-                  f"Asset bought: {check.headers}\n")
+                  f"Asset bought: {check.headers}\n"
+                  f"CSRF TOKEN: {x_token}")
             with open("logs.txt", "a") as f:
                 f.write(f"\n\n\nSomething went wrong whilst buying the item.\nGot a respone code of: {check.status_code}."
                         f" Reason: {check.reason}\n\n"
