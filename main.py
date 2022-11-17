@@ -15,6 +15,7 @@ pip install requests
 ID = '1'
 x_token = None
 
+# Checks for updates
 print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
 with open("main.py", "r") as f:
@@ -33,21 +34,27 @@ with open("logs.txt", "w") as _:
 with open("limiteds.json", "r") as f:
     config = load(f)
 
-print("Logged in.")
+print("Logging in..")
 
 debugging = config['DEBUG_MESSAGES']
 roblosec = "_"+config["cookie"].split(".ROBLOSECURITY=_")[1]
 results = []
 perm_results = []
 
+
 # This function gets your x-csrf token from roblox. This is needed to buy the limited.
 def get_xtoken():
     global x_token
 
-    # Gets the x_token every 5 minutes.
     x_token = r.post("https://auth.roblox.com/v2/logout",
                      headers={'cookie': ".ROBLOSECURITY=" + roblosec}).headers["x-csrf-token"]
-    sleep(120)
+    print("Logged in.")
+
+    while 1:
+        # Gets the x_token every 5 minutes.
+        x_token = r.post("https://auth.roblox.com/v2/logout",
+                         headers={'cookie': ".ROBLOSECURITY=" + roblosec}).headers["x-csrf-token"]
+        sleep(120)
 
 
 # This function will print all the results gotten.
@@ -76,6 +83,7 @@ def snipe_item(data):
     if price <= int(data["price"]):
         print("Found limited under the specified price.")
 
+        # The the user id of the seller
         items = compile(r"data-expected-seller-id=.*")
 
         matches = items.finditer(str(out))
@@ -83,6 +91,7 @@ def snipe_item(data):
         for i in matches:
             seller_id = int(i.group()[24:].split("\"")[1])
 
+        # Gets the special id for the limited
         items = compile(r"data-expected-seller-id=.*")
 
         matches = items.finditer(str(out))
@@ -90,8 +99,9 @@ def snipe_item(data):
         for i in matches:
             unique_id = int(i.group()[24:].split("\"")[1])
 
+        # Start buying the limited
         print("Buying limited..")
-
+        
         headers = {
             'cookie': config['cookie'],
             "x-csrf-token": x_token
