@@ -69,7 +69,6 @@ def snipe_item(data):
     matches = items.finditer(str(out))
     price = -0
     for i in matches:
-        print(i.group()[21:].split("\"")[0])
         price = int(i.group()[21:].split("\"")[0])
 
     if debugging:
@@ -84,6 +83,13 @@ def snipe_item(data):
         for i in matches:
             seller_id = int(i.group()[24:].split("\"")[1])
 
+        items = compile(r"data-expected-seller-id=.*")
+
+        matches = items.finditer(str(out))
+        unique_id = 0
+        for i in matches:
+            unique_id = int(i.group()[24:].split("\"")[1])
+
         print("Buying limited..")
 
         headers = {
@@ -94,6 +100,7 @@ def snipe_item(data):
             "expectedCurrency": "1",
             "expectedPrice": str(price),
             "expectedSellerId": str(seller_id),
+            "userAssetId": str(unique_id)
         }
 
         check = r.post(f"https://economy.roblox.com/v1/purchases/products/{data['productid']}",
