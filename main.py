@@ -92,16 +92,16 @@ def snipe_item(data):
             seller_id = int(i.group()[24:].split("\"")[1])
 
         # Gets the special id for the limited
-        items = compile(r"data-expected-seller-id=.*")
+        items = compile(r"data-lowest-private-sale-userasset-id.*")
 
         matches = items.finditer(str(out))
         unique_id = 0
         for i in matches:
-            unique_id = int(i.group()[24:].split("\"")[1])
+            unique_id = int(i.group()[38:].split("\"")[1]) if i.group()[24:].split("\"")[1] != "" else ""
 
         # Start buying the limited
         print("Buying limited..")
-        
+
         headers = {
             'cookie': config['cookie'],
             "x-csrf-token": x_token
@@ -136,6 +136,7 @@ def snipe_item(data):
                 with open("logs.txt", "a") as f:
                     f.write(f"\n\n\nGot a respone code of: {check.status_code}. Reason: {check.reason}\n\n"
                             f"All info: \n"
+                            f"Sent request: {payload}\n"
                             f"Json: \n"
                             f"{check.json()}\n\n"
                             f"Headers: \n"
@@ -151,7 +152,9 @@ def snipe_item(data):
             except:
                 print("Tried to buy the limited but something went wrong.\n\n"
                       f"Information: \n"
+                      f"Sent request: {payload}\n"
                       f"Json: {check.json()}\n"
+                      f"Reason: {check.reason}\n"
                       f"Asset bought: {check.headers}\n"
                       f"CSRF TOKEN: {x_token}")
                 with open("logs.txt", "a") as f:
@@ -171,7 +174,9 @@ def snipe_item(data):
         else:
             print("Tried to buy the limited but something went wrong.\n\n"
                   f"Information: \n"
+                  f"Sent request: {payload}\n"
                   f"Json: {check.json()}\n"
+                  f"Reason: {check.reason}\n"
                   f"Asset bought: {check.headers}\n"
                   f"CSRF TOKEN: {x_token}")
             with open("logs.txt", "a") as f:
