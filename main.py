@@ -139,6 +139,7 @@ def snipe_item(data):
                             f"Sent request: {payload}\n"
                             f"Json: \n"
                             f"{check.json()}\n\n"
+                            f"Sent info: \n{payload}\n\n"
                             f"Headers: \n"
                             f"{check.headers}\n"
                             f"Bought for: {price}\n\n\n")
@@ -164,6 +165,7 @@ def snipe_item(data):
                         f"All info: \n"
                         f"Json: \n"
                         f"{check.json()}\n\n"
+                        f"Sent info: \n{payload}\n\n"
                         f"Headers: \n"
                         f"{check.headers}\n\n\n")
                 r.post(config["webhook"], data={
@@ -185,6 +187,7 @@ def snipe_item(data):
                         f"All info: \n"
                         f"Json: \n"
                         f"{check.json()}\n\n"
+                        f"Send info: \n{payload}\n\n"
                         f"Headers: \n"
                         f"{check.headers}\n\n\n")
             r.post(config["webhook"], data={'content': f"{'@everyone' if config['pingall'] else ''} | Something went wrong whilst buying "
