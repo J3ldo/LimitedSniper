@@ -87,17 +87,17 @@ def snipe_item(data):
         items = compile(r"data-expected-seller-id=.*")
 
         matches = items.finditer(str(out))
-        seller_id = 0
+        seller_id = "0"
         for i in matches:
-            seller_id = int(i.group()[24:].split("\"")[1])
+            seller_id = str(i.group()[24:].split("\"")[1])
 
         # Gets the special id for the limited
         items = compile(r"data-lowest-private-sale-userasset-id.*")
 
         matches = items.finditer(str(out))
-        unique_id = 0
+        unique_id = "0"
         for i in matches:
-            unique_id = int(i.group()[38:].split("\"")[1]) if i.group()[24:].split("\"")[1] != "" else ""
+            unique_id = str(i.group()[38:].split("\"")[1])
 
         # Start buying the limited
         print("Buying limited..")
@@ -109,8 +109,8 @@ def snipe_item(data):
         payload = {
             "expectedCurrency": "1",
             "expectedPrice": str(price),
-            "expectedSellerId": str(seller_id),
-            "userAssetId": str(unique_id)
+            "expectedSellerId": seller_id,
+            "userAssetId": unique_id
         }
 
         check = r.post(f"https://economy.roblox.com/v1/purchases/products/{data['productid']}",
