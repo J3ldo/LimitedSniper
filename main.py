@@ -76,7 +76,7 @@ def snipe_item(data):
     matches = items.finditer(str(out))
     price = -0
     for i in matches:
-        price = int(i.group()[21:].split("\"")[0])
+        price = int(i.group()[21:].split("\"")[0]) if i.group()[21:].split("\"")[0] != "" else 0
 
     if debugging:
         results.append(f'Got price of {price}')
