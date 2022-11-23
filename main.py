@@ -6,6 +6,7 @@ from time import sleep, perf_counter
 from re import compile
 from os import system
 
+import urllib3
 '''
 PIP INSTALLS:
 pip install requests
@@ -147,12 +148,14 @@ def snipe_item(data):
                                                            f"https://www.roblox.com/catalog/{data['asset']} for {price} robux"})
 
                 if not data['buyagain']:
-                    config['limiteds'].pop(data)
+                    config['limiteds'].remove(data)
                     with open('limiteds.json', 'w') as f:
                         dump(config, f, indent=4)
-            except:
+            except Exception as e:
+                import traceback
                 print("Tried to buy the limited but something went wrong.\n\n"
                       f"Information: \n"
+                      f"Exception: {e}\n"
                       f"Sent request: {payload}\n"
                       f"Json: {check.json()}\n"
                       f"Reason: {check.reason}\n"
@@ -162,6 +165,7 @@ def snipe_item(data):
                     f.write(
                         f"\n\n\nSomething went wrong whilst buying the item.\nGot a respone code of: {check.status_code}. "
                         f"Reason: {check.reason}\n\n"
+                        f" Exception: {e}\n\n"
                         f"All info: \n"
                         f"Json: \n"
                         f"{check.json()}\n\n"
