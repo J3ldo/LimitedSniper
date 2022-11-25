@@ -213,7 +213,6 @@ def snipe_item(data):
 # Main function. Runs the sniping
 def main():
     global results, perm_results, rate_limit, time_to_sleep, times_taken
-    requests_made = 0
     x_get = Thread(target=get_xtoken)
     x_get.start()
 
@@ -239,9 +238,8 @@ def main():
 
         for thread in threads:
             thread.join()
-        requests_made += len(config['limiteds'])
 
-        try: time_to_sleep = (sum(times_taken)/len(times_taken))*3.25789474 # 3.15789474 should be the right time but its an average
+        try: time_to_sleep = 0.315789474*len(config['limiteds'])-sum(times_taken)/len(times_taken) # 3.15789474 should be the right time but its an average
         except ZeroDivisionError: time_to_sleep = time_to_sleep
 
         time_taken = perf_counter()-start
