@@ -239,8 +239,9 @@ def main():
         for thread in threads:
             thread.join()
 
-        try: time_to_sleep = 0.315789474*len(config['limiteds'])-sum(times_taken)/len(times_taken) # 3.15789474 should be the right time but its an average
+        try: time_to_sleep = 0.325789474*len(config['limiteds'])-sum(times_taken)/len(times_taken) # 3.15789474 should be the right time but its an average
         except ZeroDivisionError: time_to_sleep = time_to_sleep
+        time_to_sleep = time_to_sleep if time_to_sleep >= 0 else 0
 
         time_taken = perf_counter()-start
 
