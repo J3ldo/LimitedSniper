@@ -16,7 +16,7 @@ ID = '1'
 x_token = None
 
 # Checks for updates
-print("Checking for updates...")
+'''print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
 with open("main.py", "r") as f:
     if f.read() != script:
@@ -24,7 +24,7 @@ with open("main.py", "r") as f:
         with open("main.py", "w") as f:
             f.write(script)
             input("Updated please reopen the script")
-            exit(0)
+            exit(0)'''
 
 # Create the file if it isnt already there.
 with open("logs.txt", "w") as _:
@@ -41,9 +41,9 @@ roblosec = "_"+config["cookie"].split(".ROBLOSECURITY=_")[1]
 results = []
 perm_results = []
 rate_limit = False
+proxy_rate_limit = False
 times_taken = []
 time_to_sleep = 2
-
 
 # This function gets your x-csrf token from roblox. This is needed to buy the limited.
 def get_xtoken():
@@ -68,12 +68,14 @@ def print_results(results: list, time_taken: float):
 
 
 # The main function that checks an asset and snipes if possible.
-def snipe_item(data):
-    global results, perm_results, rate_limit
+def snipe_item(data, proxy=None, sleep_time=-1):
+    global results, perm_results, rate_limit, proxy_rate_limit
     start = perf_counter()
+    proxy = {"https": proxy} if proxy is not None else {}
 
     out = r.get(f"https://www.roblox.com/catalog/{data['asset']}",
-                headers={"cookie": config['cookie']}, cookies={".ROBLOSECURITY": roblosec}).content
+            headers={"cookie": config['cookie']}, cookies={".ROBLOSECURITY": roblosec},
+            proxies=proxy).content
 
     items = compile(r"data-expected-price=.*")
 
@@ -83,7 +85,10 @@ def snipe_item(data):
         price = int(i.group()[21:].split("\"")[0]) if i.group()[21:].split("\"")[0] != "" else price
 
     if price == 9e+10:
-        rate_limit = True
+        if proxy == {}:
+            rate_limit = True
+        else:
+            proxy_rate_limit = True
         return
 
     if debugging:
@@ -91,7 +96,7 @@ def snipe_item(data):
 
     times_taken.append(perf_counter() - start)
     if price >= int(data["price"]):
-        sleep(time_to_sleep)
+        sleep(time_to_sleep if sleep_time == -1 else sleep_time)
         return
 
     print("Found limited under the specified price.")
@@ -156,7 +161,8 @@ def snipe_item(data):
                         f"Headers: \n"
                         f"{check.headers}\n"
                         f"Bought for: {price}\n\n\n")
-            r.post(config["webhook"], data={'content': f"{'@everyone' if config['pingall'] else ''} | Just bought "
+            if config["webhook"] != "":
+                r.post(config["webhook"], data={'content': f"{'@everyone' if config['pingall'] else ''} | Just bought "
                                                         f"https://www.roblox.com/catalog/{data['asset']} for {price} robux"})
 
             if not data['buyagain']:
@@ -184,10 +190,11 @@ def snipe_item(data):
                     f"Sent info: \n{payload}\n\n"
                     f"Headers: \n"
                     f"{check.headers}\n\n\n")
-            r.post(config["webhook"], data={
-                'content': f"{'@everyone' if config['pingall'] else ''} | Something went wrong whilst buying"
-                            f" https://www.roblox.com/catalog/{data['asset']} for {price}. "
-                            f"See logs for more information."})
+            if config["webhook"] != "":
+                r.post(config["webhook"], data={
+                    'content': f"{'@everyone' if config['pingall'] else ''} | Something went wrong whilst buying"
+                                f" https://www.roblox.com/catalog/{data['asset']} for {price}. "
+                                f"See logs for more information."})
 
     else:
         print("Tried to buy the limited but something went wrong.\n\n"
@@ -206,9 +213,41 @@ def snipe_item(data):
                     f"Send info: \n{payload}\n\n"
                     f"Headers: \n"
                     f"{check.headers}\n\n\n")
-        r.post(config["webhook"], data={'content': f"{'@everyone' if config['pingall'] else ''} | Something went wrong whilst buying "
+        if config["webhook"] != "":
+            r.post(config["webhook"], data={'content': f"{'@everyone' if config['pingall'] else ''} | Something went wrong whilst buying "
                                                     f"https://www.roblox.com/catalog/{data['asset']} for {price}. See the logs for more information."})
 
+# Initializes proxy threads
+if len(config.get("PROXIES", [])) > 0:
+    current_proxy = config["PROXIES"][0]
+    current_proxy_idx = 0
+    requests_made = 0
+def init_proxies():
+    global current_proxy, requests_made, current_proxy_idx
+    threads = []
+
+    if config["PROXY_USE"] == 1:
+        if requests_made >= 200:
+            current_proxy_idx += 1
+            current_proxy = config["PROXIES"][current_proxy_idx]
+        elif proxy_rate_limit:
+            current_proxy_idx += 1
+            if current_proxy_idx > len(config["PROXIES"]):
+                current_proxy_idx = 0
+            current_proxy = config["PROXIES"][current_proxy_idx]
+
+        for i in range(len(config['limiteds'])):
+            threads.append(Thread(target=snipe_item, args=(config['limiteds'][i], current_proxy, 0)))
+
+    elif config["PROXY_USE"] == 2:
+        for proxy in config["PROXIES"]:
+            for i in range(len(config['limiteds'])):
+                threads.append(Thread(target=snipe_item, args=(config['limiteds'][i], proxy,)))
+
+    for thread in threads:
+        thread.start()
+
+    return threads
 
 # Main function. Runs the sniping
 def main():
@@ -228,7 +267,7 @@ def main():
 
         threads = []
 
-        # Initialize all the threads
+        # Initialize all the threads without proxies
         for i in range(len(config['limiteds'])):
             threads.append(Thread(target=snipe_item, args=(config['limiteds'][i],)))
 
@@ -236,11 +275,15 @@ def main():
         for thread in threads:
             thread.start()
 
+        #Initialize proxies
+        if len(config.get("PROXIES", [])) > 0:
+            threads.extend(init_proxies())
+
         for thread in threads:
             thread.join()
 
         time_to_sleep = 0.305 - min(times_taken)#sum(times_taken)/len(times_taken)
-        time_to_sleep = time_to_sleep if time_to_sleep >= 0 else 0
+        time_to_sleep = time_to_sleep if time_to_sleep >= 0 else 0.1
 
         time_taken = perf_counter()-start
 
@@ -254,3 +297,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
