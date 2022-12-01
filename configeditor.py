@@ -11,6 +11,15 @@ try:
 except FileNotFoundError:
     pass
 
+print("Checking for updates...")
+script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/configeditor.py").text
+with open("main.py", "r") as f:
+    if f.read() != script:
+        print("Updating...")
+        with open("configeditor.py", "w") as f:
+            f.write(script)
+            input("Updated please reopen the script")
+            exit(0)
 
 def new():
     while 1:
@@ -19,10 +28,21 @@ def new():
             break
         print("You provided the wrong cookie. Please follow the instructions on the github page.")
 
-    config["webhook"] = input("Webhook url: ")
+    config["webhook"] = input("Webhook url keep empty for no webhook: ")
     config['pingall'] = True if input("Ping everyone Y/N: ").lower() == "y" else False
 
     config['DEBUG_MESSAGES'] = True if input("Do you want to log all gotten prices in the console? Y/N: ").lower() == "y" else False
+
+    config["PROXIES"] = []
+    proxy_list = input("What proxylist do you want to use. Leave empty for no proxies: ")
+    if proxy_list:
+        with open(proxy_list, "r") as f:
+            config["PROXIES"] = f.read().split("\n")
+        print("Successfully loaded proxy list.")
+        config["PROXY_USE"] = int(input("How do you want to use your proxies?\n"
+                                        "1) Swap on ratelimit (Uses less data)\n"
+                                        "2) Use all proxies to check (Fast)\n"
+                                        "Choice (1-2): "))
 
     config['limiteds'] = []
     for i in range(int(input("Amount of limiteds you want to snipe: "))):
@@ -64,7 +84,8 @@ def edit():
                        "3) An asset.\n"
                        "4) Logging information\n"
                        "5) Add an asset to snipe\n"
-                       "6) Save and quit\n"
+                       "6) Add new proxy list\n"
+                       "7) Save and quit\n"
                        "> "
                        )
 
@@ -120,13 +141,28 @@ def edit():
 
             config['limiteds'][-1]["productid"] = productid
 
-
         elif int(choice) == 6:
+            config["PROXIES"] = []
+            proxy_list = input("What proxylist do you want to use: ")
+            if proxy_list:
+                with open(proxy_list, "r") as f:
+                    config["PROXIES"] = f.read().split("\n")
+                    try: config["PROXIES"].remove("")
+                    except ValueError: pass
+
+                print("Successfully loaded proxy list.")
+                config["PROXY_USE"] = int(input("How do you want to use your proxies?\n"
+                                                "1) Swap on ratelimit (Uses less data)\n"
+                                                "2) Use all proxies to check (Fast)\n"
+                                                "Choice (1-2): "))
+
+        elif int(choice) == 7:
             with open("limiteds.json", 'w') as f:
                 json.dump(config, f, indent=4)
 
             print('Succesfully saved config. You can now close this window')
             input()
+            exit(0)
 
 
 def main():
@@ -144,7 +180,6 @@ def main():
 
     elif int(choice) == 2:
         new()
-
 
 
 if __name__ == '__main__':
