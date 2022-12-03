@@ -282,7 +282,7 @@ def main():
         for thread in threads:
             thread.join()
 
-        time_to_sleep = 0.305 - min(times_taken)#sum(times_taken)/len(times_taken)
+        time_to_sleep = 0.305 - min(times_taken if len(times_taken) != 0 else [0.1])#sum(times_taken)/len(times_taken)
         time_to_sleep = time_to_sleep if time_to_sleep >= 0 else 0.1
 
         time_taken = perf_counter()-start
