@@ -18,7 +18,7 @@ x_token = None
 # Checks for updates
 print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
-with open("configeditor.py", "r") as f:
+with open("main.py", "r") as f:
     if f.read() != script:
         print("Updating...")
         with open("main.py", "w") as f:
