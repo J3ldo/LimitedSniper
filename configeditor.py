@@ -13,7 +13,7 @@ except FileNotFoundError:
 
 print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/configeditor.py").text
-with open("main.py", "r") as f:
+with open("configeditor.py", "r") as f:
     if f.read() != script:
         print("Updating...")
         with open("configeditor.py", "w") as f:
