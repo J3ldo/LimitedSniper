@@ -16,7 +16,7 @@ ID = '1'
 x_token = None
 
 # Checks for updates
-print("Checking for updates...")
+'''print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
 with open("main.py", "r") as f:
     if f.read() != script:
@@ -24,7 +24,7 @@ with open("main.py", "r") as f:
         with open("main.py", "w") as f:
             f.write(script)
             input("Updated please reopen the script")
-            exit(0)
+            exit(0)'''
 
 # Create the file if it isnt already there.
 with open("logs.txt", "w") as _:
@@ -42,8 +42,7 @@ results = []
 perm_results = []
 rate_limit = False
 proxy_rate_limit = False
-times_taken = []
-time_to_sleep = 2
+ratelimit_multi = 60/(200/len(config['limiteds']))
 
 # This function gets your x-csrf token from roblox. This is needed to buy the limited.
 def get_xtoken():
@@ -94,9 +93,10 @@ def snipe_item(data, proxy=None, sleep_time=-1):
     if debugging:
         results.append(f'Got price of {price}')
 
-    times_taken.append(perf_counter() - start)
     if price >= int(data["price"]):
-        sleep(time_to_sleep if sleep_time == -1 else sleep_time)
+        to_sleep = ratelimit_multi - (perf_counter()-start)
+        to_sleep = to_sleep if to_sleep >= 0 else 0
+        sleep(to_sleep if sleep_time == -1 else sleep_time)
         return
 
     print("Found limited under the specified price.")
@@ -255,6 +255,7 @@ def main():
     x_get = Thread(target=get_xtoken)
     x_get.start()
 
+    reqs_made = 0
     while len(config['limiteds']) > 0:
         times_taken = []
 
@@ -262,6 +263,7 @@ def main():
             # Uptime is 40 seconds for 10 limiteds.
             # Rate limit is 200 limiteds
             print("Ran in to a rate limit. Waiting for the next minute to start..")
+            print("Made requests:", reqs_made)
             sleep(60 - datetime.now().second)
             rate_limit = False
 
@@ -282,13 +284,11 @@ def main():
         for thread in threads:
             thread.join()
 
-        time_to_sleep = 0.305 - min(times_taken if len(times_taken) != 0 else [0.1])#sum(times_taken)/len(times_taken)
-        time_to_sleep = time_to_sleep if time_to_sleep >= 0 else 0.1
-
         time_taken = perf_counter()-start
 
         # Sleep to stop rate limiting. And print out the results
         print_results(results, time_taken)
+        reqs_made += len(times_taken)
         # to_sleep = (0.255 - time_taken * 0.1) * len(config['limiteds'])
         # sleep(time_taken*0.6)#to_sleep if to_sleep >= 0 else 0)
 
