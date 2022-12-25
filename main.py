@@ -26,6 +26,7 @@ try:
                 f.write(script)
                 input("Updated please reopen the script")
                 exit(0)
+except FileNotFoundError: pass
 
 # Create the file if it isnt already there.
 with open("logs.txt", "w") as _:
