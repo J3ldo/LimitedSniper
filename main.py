@@ -18,13 +18,14 @@ x_token = None
 # Checks for updates
 print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
-with open("main.py", "r") as f:
-    if f.read() != script:
-        print("Updating...")
-        with open("main.py", "w") as f:
-            f.write(script)
-            input("Updated please reopen the script")
-            exit(0)
+try:
+    with open("main.py", "r") as f:
+        if f.read() != script:
+            print("Updating...")
+            with open("main.py", "w") as f:
+                f.write(script)
+                input("Updated please reopen the script")
+                exit(0)
 
 # Create the file if it isnt already there.
 with open("logs.txt", "w") as _:
