@@ -29,11 +29,13 @@ try:
 except FileNotFoundError: pass
 
 # Create the file if it isnt already there.
-with open("logs.txt", "w") as _:
-    pass
+try:
+    with open("logs.txt", "w") as _:
+        pass
+except FileNotFoundError: pass
 
 # Get the current config file
-with open("limiteds.json", "r") as f:
+with open("./limiteds.json", "r") as f:
     config = load(f)
 
 print("Logging in..")
