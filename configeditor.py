@@ -13,13 +13,15 @@ except FileNotFoundError:
 
 print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/configeditor.py").text
-with open("configeditor.py", "r") as f:
-    if f.read() != script:
-        print("Updating...")
-        with open("configeditor.py", "w") as f:
-            f.write(script)
-            input("Updated please reopen the script")
-            exit(0)
+try:
+    with open("configeditor.py", "r") as f:
+        if f.read() != script:
+            print("Updating...")
+            with open("configeditor.py", "w") as f:
+                f.write(script)
+                input("Updated please reopen the script")
+                exit(0)
+except FileNotFoundError: pass
 
 def new():
     while 1:
