@@ -16,6 +16,7 @@
 ## How to use
 Here you will read a simple step-by-step guide about how the program works and how to install it.
 * Git clone the repository or install it from the releases
+* install pythin and after that the requests module   
 * Run the config.exe or the config.py file and fill in the needed information.
 * Open the sniper.exe or sniper.py file and see as it snipes limiteds!   
 If you run in to any issues message **Jeldo#9587** on discord for help.
