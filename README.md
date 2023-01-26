@@ -3,6 +3,8 @@
 
 ## Please read before using!
 ## Getting your roblox cookie
+
+### Method 1
 **THE ROBLOX COOKIE THAT CAN BE FOUND IN YOUR COOKIES IS NOT THE SAME COOKIE PLEASE FOLLOW THIS GUIDE**
 * Open roblox in your browser.
 * Open the developer console by pressing: "CTRL+SHIFT+F11"
@@ -11,7 +13,13 @@
 * Scroll all the way up to the start and open the tab thats there. It should a blue box with blue lines in it.
 * Scroll down to the Request headers tab. Then search for the cookie item.
 * Thats it you're now done!
-**Any problems or bugs? Please message J3ldo#9587 on discord**
+
+### Method 3
+* Install https://github.com/J3ldo/Roblox-Token-Fetcher
+* Follow the steps
+* Get the full roblox token.
+
+**Any problems or bugs? Please message J3ldo#9587 on discord or create an issue.**
 
 ## How to use
 Here you will read a simple step-by-step guide about how the program works and how to install it.
