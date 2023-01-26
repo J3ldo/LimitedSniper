@@ -16,26 +16,22 @@ ID = '1'
 x_token = None
 
 # Checks for updates
-print("Checking for updates...")
+'''print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
-try:
-    with open("main.py", "r") as f:
-        if f.read() != script:
-            print("Updating...")
-            with open("main.py", "w") as f:
-                f.write(script)
-                input("Updated please reopen the script")
-                exit(0)
-except FileNotFoundError: pass
+with open("main.py", "r") as f:
+    if f.read() != script:
+        print("Updating...")
+        with open("main.py", "w") as f:
+            f.write(script)
+            input("Updated please reopen the script")
+            exit(0)'''
 
 # Create the file if it isnt already there.
-try:
-    with open("logs.txt", "w") as _:
-        pass
-except FileNotFoundError: pass
+with open("buy logs.txt", "w") as _:
+    pass
 
 # Get the current config file
-with open("./limiteds.json", "r") as f:
+with open("limiteds.json", "r") as f:
     config = load(f)
 
 print("Logging in..")
@@ -155,7 +151,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
                     f"Asset bought: {check.json()['assetName']}\n"
                     f"Asset type: {check.json()['assetType']}\n"
             )
-            with open("logs.txt", "a") as f:
+            with open("buy logs.txt", "a") as f:
                 f.write(f"\n\n\nGot a respone code of: {check.status_code}. Reason: {check.reason}\n\n"
                         f"All info: \n"
                         f"Sent request: {payload}\n"
@@ -183,7 +179,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
                     f"Reason: {check.reason}\n"
                     f"Asset bought: {check.headers}\n"
                     f"CSRF TOKEN: {x_token}")
-            with open("logs.txt", "a") as f:
+            with open("buy logs.txt", "a") as f:
                 f.write(
                     f"\n\n\nSomething went wrong whilst buying the item.\nGot a respone code of: {check.status_code}. "
                     f"Reason: {check.reason}\n\n"
@@ -208,7 +204,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
                 f"Reason: {check.reason}\n"
                 f"Asset bought: {check.headers}\n"
                 f"CSRF TOKEN: {x_token}")
-        with open("logs.txt", "a") as f:
+        with open("buy logs.txt", "a") as f:
             f.write(f"\n\n\nSomething went wrong whilst buying the item.\nGot a respone code of: {check.status_code}."
                     f" Reason: {check.reason}\n\n"
                     f"All info: \n"
