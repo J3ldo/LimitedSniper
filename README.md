@@ -14,7 +14,7 @@
 * Scroll down to the Request headers tab. Then search for the cookie item.
 * Thats it you're now done!
 
-### Method 3
+### Method 2
 * Install https://github.com/J3ldo/Roblox-Token-Fetcher
 * Follow the steps
 * Get the full roblox token.
