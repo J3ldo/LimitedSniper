@@ -38,10 +38,10 @@ If you run in to any issues message **Jeldo#9587** on discord for help.
 
 ## How it works
 ### Simple explanation
-Once the program is opened it will go through all items in parralel and then ask roblox for the price on the item. If the price equals or is lower then the expected price it will start buying it. The buying will be done by replecating a real user on the site by asking roblox to buy it using your roblox cookie. Once this is done the program will send the notification through the webhook if on, print out the status to the console, and finally log all information to the logs file.
+Once the program is opened it will go through all items in parralel and then ask roblox for the price on the item. If the price equals or is lower than the expected price it will start buying the selected item. The buying will be done by replecating a real user on the site by asking roblox to buy it using your .ROBLOSECURITY. Once this is done the program will send the notification through the webhook if it is on, then print out the status to the console, and finally log all information to the buy logs file.
 
 
 ### In-depth explanation
 Once the programs starts it will initialize a continiously running thread that grabs the x-csrf-token every 10 minutes. After that every asset id gets assigned its own thread and sends a request to the store page then grabs the price using regex. If the price is lower or equeals the expected price then it will start buying the item.  
 Since the x-csrf-token is already gotten it will put it in. After that it grabs the already gotten product id from the config. And finally it will give the roblox token and send the request to roblox.  
-When a response comes back a log is generated based upon it. And then if the webhook is on sends a notification using said webhook.
+When a response comes back a buy log is generated based upon it. And then if the webhook is on sends a notification using said webhook.
