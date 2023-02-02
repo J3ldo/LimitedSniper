@@ -17,7 +17,7 @@
 ### Method 2
 * Install https://github.com/J3ldo/Roblox-Token-Fetcher
 * Follow the steps
-* Get the full roblox token.
+* Get the full roblox token **THIS IS THE BOTTOM ONE AND NOT THE TOP ONE!**.
 
 **Any problems or bugs? Please message J3ldo#9587 on discord or create an issue.**
 
