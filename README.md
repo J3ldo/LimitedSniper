@@ -1,5 +1,6 @@
 # LimitedSniper 
 ### A project by Jeldo#9587
+### Premium version out read #buy-premium in the [discord server](https://discord.gg/7nVV2DCV) for more information
 
 ## Please read before using!
 ## Getting your roblox cookie
@@ -19,7 +20,7 @@
 * Follow the steps
 * Get the full roblox token **THIS IS THE BOTTOM ONE AND NOT THE TOP ONE!**.
 
-**Any problems or bugs? Please message J3ldo#9587 on discord or create an issue.**
+**Any problems or bugs? Please join the [discord server](https://discord.gg/7nVV2DCV) and make a support post.**
 
 ## How to use
 Here you will read a simple step-by-step guide about how the program works and how to install it.
