@@ -8,7 +8,7 @@
 ### Method 1
 **THE ROBLOX COOKIE THAT CAN BE FOUND IN YOUR COOKIES IS NOT THE SAME COOKIE PLEASE FOLLOW THIS GUIDE**
 * Open roblox in your browser.
-* Open the developer console by pressing: "CTRL+SHIFT+F11"
+* Open the developer console by pressing: "CTRL+SHIFT+I"
 * Navigate to the "Network"
 * Reload the page
 * Scroll all the way up to the start and open the tab thats there. It should a blue box with blue lines in it.
