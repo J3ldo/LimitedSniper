@@ -31,10 +31,10 @@ Here you will read a simple step-by-step guide about how the program works and h
 If you run in to any issues message **Jeldo#9587** on discord for help.
 
 ### Notes: 
-* More then 10 limiteds is not reccommended as you will run into ratelimits
+* More than 10 limiteds is not reccommended as the speed the sniper will run at will decrease by lots.
 * This DOES NOT steal your roblox cookie. You can check the source code.
-* The .exe is the same as the .py files
 * Feel free to make suggestions or fork this repository.
+* The premium version is way faster checking 119 limiteds in just 0,75 seconds
 
 
 ## How it works
