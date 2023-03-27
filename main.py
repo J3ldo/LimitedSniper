@@ -16,7 +16,7 @@ ID = '1'
 x_token = None
 
 # Checks for updates
-'''print("Checking for updates...")
+print("Checking for updates...")
 script = r.get("https://raw.githubusercontent.com/J3ldo/LimitedSniper/main/main.py").text
 with open("main.py", "r") as f:
     if f.read() != script:
@@ -24,7 +24,7 @@ with open("main.py", "r") as f:
         with open("main.py", "w") as f:
             f.write(script)
             input("Updated please reopen the script")
-            exit(0)'''
+            exit(0)
 
 # Create the file if it isnt already there.
 with open("buy logs.txt", "w") as _:
@@ -73,7 +73,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
     proxy = {"https": proxy} if proxy is not None else {}
 
     out = r.get(f"https://www.roblox.com/catalog/{data['asset']}",
-            headers={"cookie": config['cookie']}, cookies={".ROBLOSECURITY": roblosec},
+            headers={"cookie": config['cookie']}, cookies={".ROBLOSECURITY": roblosec} if proxy != {} else {},
             proxies=proxy).content
 
     items = compile(r"data-expected-price=.*")
