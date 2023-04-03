@@ -63,7 +63,8 @@ def get_xtoken():
 def print_results(results: list, time_taken: float):
     system('cls')
     print("".join(i+"\n" for i in results))
-    print(f"Time taken: {round(time_taken, 4)}s")
+    print(f"Ideal time: {ratelimit_multi}\n"
+          f"Time taken: {round(time_taken, 4)}s")
 
 
 # The main function that checks an asset and snipes if possible.
@@ -72,16 +73,26 @@ def snipe_item(data, proxy=None, sleep_time=-1):
     start = perf_counter()
     proxy = {"https": proxy} if proxy is not None else {}
 
-    out = r.get(f"https://www.roblox.com/catalog/{data['asset']}",
-            headers={"cookie": config['cookie']}, cookies={".ROBLOSECURITY": roblosec} if proxy != {} else {},
-            proxies=proxy).content
+    if proxy == {}:
+        out = r.get(f"https://www.roblox.com/catalog/{data['asset']}",
+            cookies={".ROBLOSECURITY": roblosec}).content
 
-    items = compile(r"data-expected-price=.*")
+        items = compile(r"data-expected-price=.*")
 
-    matches = items.finditer(str(out))
-    price = 9e+10
-    for i in matches:
-        price = int(i.group()[21:].split("\"")[0]) if i.group()[21:].split("\"")[0] != "" else price
+        matches = items.finditer(str(out))
+        price = 9e+10
+        for i in matches:
+            price = int(i.group()[21:].split("\"")[0]) if i.group()[21:].split("\"")[0] != "" else price
+    else:
+        out = r.get(f"https://www.roblox.com/catalog/{data['asset']}",
+                    proxies=proxy).content
+
+        items = compile(r'<span class="text-robux-lg">.*</span>')
+
+        matches = items.finditer(str(out))
+        price = 9e+10
+        for i in matches:
+            price = i.group().split("</span>")[1]
 
     if price == 9e+10:
         if proxy == {}:
@@ -102,6 +113,10 @@ def snipe_item(data, proxy=None, sleep_time=-1):
     print("Found limited under the specified price.")
 
     # The the user id of the seller
+    if proxy != {}:
+        out = r.get(f"https://www.roblox.com/catalog/{data['asset']}",
+            cookies={".ROBLOSECURITY": roblosec}).content
+
     items = compile(r"data-expected-seller-id=.*")
 
     matches = items.finditer(str(out))
