@@ -28,6 +28,21 @@ Install python. You first need to install python you can do this [here](https://
 Click on code > download zip. This will download the program as a .zip file after that unpack the installed limited sniper into a directory of choice.
 
 ### Step 3
+For the config.py file you will need your roblox cookie. You can get this in 2 ways.
+
+#### Method 1
+First install this repository: https://github.com/J3ldo/Roblox-Token-Fetcher  
+Then open google chrome and click on the extensions button > manage extensions > load unpacked  
+Select the repository directory and click on the extension icon now just copy the full token this is the 2nd one!  
+And your done!
+
+#### Method 2
+Go to roblox and press F12 then go to the network tab.  
+Now with your network tab open press the circle (It should turn red when clicked).  
+Refresh the page and search for the most top item and click on it.  
+Scroll down to the cookie part and copy the whole cookie (WITHOUT THE "cookie:")
+
+### Step 4
 Open the config.py file and make a new config. When you've made the new config just open the sniper.py file and it will start checking the prices.
 Please note that the sniper will become 'slow' after more than 10 limiteds.
 
