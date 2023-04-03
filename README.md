@@ -10,7 +10,7 @@
 ## Premium
 If you aren't happy with the preformance of this limited sniper or want more features. You can buy the premium limited sniper. This sniper has way more functionality because for just €5,- you can get the following features.
   
-RAP based buying, Projection detection, alt account support, buying every limited with a price under 50 robux, blacklisted keywords, checking 119 limiteds in 0,75 seconds (no proxies) and way more. 
+Search items based on RAP, Projection detection, alt account support, buying every limited with a price under 50 robux, blacklisted keywords, checking 119 limiteds in 0,75 seconds (no proxies), dynamic pricing of limited, and way more. 
 
 ## Features
 * Proxy support
