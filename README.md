@@ -1,8 +1,7 @@
 # LimitedSniper 
 ### A project by Jeldo#9587
-### Premium version out read #buy-premium in the [discord server(https://discord.gg/3Uvcf8d9aY) for more information
+### Premium version out read #buy-premium in the [discord server](https://discord.gg/3Uvcf8d9aY) for more information
 
-## Please read before using!
 ## Getting your roblox cookie
 
 ### Method 1
@@ -26,8 +25,8 @@
 Here you will read a simple step-by-step guide about how the program works and how to install it.
 * Git clone the repository or install it from the releases
 * install pythin and after that the requests module   
-* Run the config.exe or the config.py file and fill in the needed information.
-* Open the sniper.exe or sniper.py file and see as it snipes limiteds!   
+* Run the the config.py file and fill in the needed information.
+* Open the sniper.py file and ser start to snipe limiteds!   
 If you run in to any issues message **Jeldo#9587** on discord for help.
 
 ### Notes: 
