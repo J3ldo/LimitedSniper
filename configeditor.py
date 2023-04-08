@@ -133,15 +133,8 @@ def edit():
             config['limiteds'][-1]['buyagain'] = True if input(
                 "Do you want the limited sniper to buy the item more then once Y/N: ").lower() == 'y' else False
 
-            out = r.get(f"https://www.roblox.com/catalog/{asset_id}").text
-            items = re.compile(r"data-product-id=.*")
-
-            matches = items.finditer(str(out))
-            productid = None
-            for x in matches:
-                productid = str(x.group()[17:].split("\"")[0])
-
-            config['limiteds'][-1]["productid"] = productid
+            out  = r.get(f"https://www.roblox.com/catalog/{asset_id}").text
+            config['limiteds'][-1]["productid"] = out.split("data-product-id=\"")[1].split("\"")[0]
 
         elif int(choice) == 6:
             config["PROXIES"] = []
