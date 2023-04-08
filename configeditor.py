@@ -58,15 +58,7 @@ def new():
 
 
         out  = r.get(f"https://www.roblox.com/catalog/{asset_id}").text
-        items = re.compile(r'data-product-id=".*"')
-
-        matches = items.finditer(str(out))
-        productid = None
-        for x in matches:
-            productid = str(x.group()[17:].split("\"")[1])
-
-
-        config['limiteds'][i]["productid"] = productid
+        config['limiteds'][i]["productid"] = out.split("data-product-id=\"")[1].split("\"")[0]
 
         print('\n')
 
