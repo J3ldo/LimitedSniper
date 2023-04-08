@@ -43,7 +43,7 @@ Refresh the page and search for the most top item and click on it.
 Scroll down to the cookie part and copy the whole cookie (WITHOUT THE "cookie:")
 
 ### Step 4
-Open the config.py file and make a new config. When you've made the new config just open the sniper.py file and it will start checking the prices.
+Open the configeditor.py file and make a new config. When you've made the new config just open the main.py file and it will start checking the prices.
 Please note that the sniper will become 'slow' after more than 10 limiteds.
 
 **If any of these steps give you an error feel free to ask about them in the [discord server](https://discord.gg/3Uvcf8d9aY)**
