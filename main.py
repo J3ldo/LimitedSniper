@@ -151,7 +151,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
 
     if check.ok:
         try:
-            print("Bought the limited. With a response of 200 (Succes)\n\n"
+            print("Bought the limited. With a response of 200 (Success)\n\n"
                     f"Information: \n"
                     f"Purchased: {check.json()['purchased']}\n"
                     f"Asset bought: {check.json()['assetName']}\n"
@@ -160,7 +160,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
                     f"{check.json()}")
 
             perm_results.append(
-                    "Bought the limited. With a response of 200 (Succes)\n\n"
+                    "Bought the limited. With a response of 200 (Success)\n\n"
                     "Information: \n"
                     f"Purchased: {check.json()['purchased']}\n"
                     f"Asset bought: {check.json()['assetName']}\n"
@@ -196,7 +196,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
                     f"CSRF TOKEN: {x_token}")
             with open("buy logs.txt", "a") as f:
                 f.write(
-                    f"\n\n\nSomething went wrong whilst buying the item.\nGot a respone code of: {check.status_code}. "
+                    f"\n\n\nSomething went wrong whilst buying the item.\nGot a response code of: {check.status_code}. "
                     f"Reason: {check.reason}\n\n"
                     f" Exception: {e}\n\n"
                     f"All info: \n"
@@ -220,7 +220,7 @@ def snipe_item(data, proxy=None, sleep_time=-1):
                 f"Asset bought: {check.headers}\n"
                 f"CSRF TOKEN: {x_token}")
         with open("buy logs.txt", "a") as f:
-            f.write(f"\n\n\nSomething went wrong whilst buying the item.\nGot a respone code of: {check.status_code}."
+            f.write(f"\n\n\nSomething went wrong whilst buying the item.\nGot a response code of: {check.status_code}."
                     f" Reason: {check.reason}\n\n"
                     f"All info: \n"
                     f"Json: \n"
